@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XCleaner Pro</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: linear-gradient(to right, #2563eb, #3b82f6);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        main {
+            flex-grow: 1;
+            padding: 1.5rem 1rem;
+            overflow-y: auto;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .status {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .status-icon {
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
+            background: linear-gradient(to bottom right, #34d399, #10b981);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+        }
+
+        .status-text {
+            flex-grow: 1;
+        }
+
+        .boost-button {
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .boost-button:hover {
+            background-color: #2563eb;
+        }
+
+        .ram-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .ram-option {
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .ram-option.active {
+            background-color: #3b82f6;
+            color: white;
+        }
+
+        .ram-option:not(.active) {
+            background-color: #e5e7eb;
+            color: #1f2937;
+        }
+
+        .ram-option:not(.active):hover {
+            background-color: #d1d5db;
+        }
+
+        .cleaning-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .cleaning-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .cleaning-icon {
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        nav {
+            background-color: white;
+            border-top: 1px solid #e5e7eb;
+            padding: 0.75rem 1rem;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .nav-button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #6b7280;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-button.active {
+            color: #3b82f6;
+        }
+
+        .nav-button:hover {
+            color: #2563eb;
+        }
+
+        .nav-button span {
+            font-size: 0.75rem;
+            margin-top: 0.25rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>XCleaner Pro</h1>
+            <i data-feather="settings"></i>
+        </header>
+        <main>
+            <div class="card animate-fade-in" style="animation-delay: 0.1s;">
+                <h2>Device Status</h2>
+                <div class="status">
+                    <div class="status-icon">
+                        <i data-feather="zap" color="white"></i>
+                    </div>
+                    <div class="status-text">
+                        <p style="font-size: 1.125rem; font-weight: 500;">Optimized</p>
+                        <p style="font-size: 0.875rem; color: #6b7280;">Last cleaned 2h ago</p>
+                    </div>
+                    <button class="boost-button">Boost Now</button>
+                </div>
+            </div>
+            <div class="card animate-fade-in" style="animation-delay: 0.2s;">
+                <h2>RAM Optimization</h2>
+                <p style="font-size: 0.875rem; color: #6b7280; margin-bottom: 1rem;">Select your device's RAM:</p>
+                <div class="ram-options">
+                    <button class="ram-option active">4GB</button>
+                    <button class="ram-option">6GB</button>
+                    <button class="ram-option">8GB</button>
+                    <button class="ram-option">16GB</button>
+                </div>
+            </div>
+            <div class="card animate-fade-in" style="animation-delay: 0.3s;">
+                <h2>Cleaning Options</h2>
+                <div class="cleaning-options">
+                    <div class="cleaning-option">
+                        <div class="cleaning-icon" style="background-color: #fee2e2;">
+                            <i data-feather="trash-2" color="#ef4444"></i>
+                        </div>
+                        <p style="font-size: 0.875rem; font-weight: 500;">Junk Cleaner</p>
+                        <i data-feather="chevron-right" size="16" color="#9ca3af"></i>
+                    </div>
+                    <div class="cleaning-option">
+                        <div class="cleaning-icon" style="background-color: #fef3c7;">
+                            <i data-feather="bar-chart-2" color="#f59e0b"></i>
+                        </div>
+                        <p style="font-size: 0.875rem; font-weight: 500;">Performance Boost</p>
+                        <i data-feather="chevron-right" size="16" color="#9ca3af"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card animate-fade-in" style="animation-delay: 0.4s;">
+                <h2>Cleaning Stats</h2>
+                <div class="stats">
+                    <div>
+                        <p class="stat-value" style="color: #3b82f6;">1.2 GB</p>
+                        <p class="stat-label">Junk Removed</p>
+                    </div>
+                    <div>
+                        <p class="stat-value" style="color: #10b981;">15%</p>
+                        <p class="stat-label">Performance Gain</p>
+                    </div>
+                    <div>
+                        <p class="stat-value" style="color: #8b5cf6;">7</p>
+                        <p class="stat-label">Apps Optimized</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <nav>
+            <div class="nav-buttons">
+                <a href="#" class="nav-button active">
+                    <i data-feather="home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="#" class="nav-button">
+                    <i data-feather="zap"></i>
+                    <span>Boost</span>
+                </a>
+                <a href="#" class="nav-button">
+                    <i data-feather="tool"></i>
+                    <span>Tools</span>
+                </a>
+                <a href="#" class="nav-button">
+                    <i data-feather="user"></i>
+                    <span>Profile</span>
+                </a>
+            </div>
+        </nav>
+    </div>
+    <script>
+        // Initialize Feather icons
+        feather.replace();
+
+        // RAM option selection
+        const ramOptions = document.querySelectorAll('.ram-option');
+        ramOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                ramOptions.forEach(opt => opt.classList.remove('active'));
+                option.classList.add('active');
+            });
+        });
+
+        // Smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add hover effect to cards
+        const cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-5px)';
+                card.style.boxShadow = '0 6px 8px rgba(0, 0, 0, 0.15)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+                card.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+            });
+        });
+
+        // Add pulse animation to boost button
+        const boostButton = document.querySelector('.boost-button');
+        boostButton.addEventListener('click', () => {
+            boostButton.style.animation = 'pulse 0.5s';
+            setTimeout(() => {
+                boostButton.style.animation = '';
+            }, 500);
+        });
+
+        // Add animation for cleaning options
+        const cleaningOptions = document.querySelectorAll('.cleaning-option');
+        cleaningOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                option.style.animation = 'bounce 0.5s';
+                setTimeout(() => {
+                    option.style.animation = '';
+                }, 500);
+            });
+        });
+
+        // Add keyframe animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+                100% { transform: scale(1); }
+            }
+            @keyframes bounce {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-10px); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+  </html>
